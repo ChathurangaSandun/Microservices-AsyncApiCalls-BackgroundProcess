@@ -27,6 +27,8 @@ namespace WithHangFire
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IEmailService, EmailService>();
+
+            // configure database  and hangfire
             services.AddHangfire(config =>
                 config.UseSqlServerStorage(Configuration.GetConnectionString("HangFire.Test")));
 
@@ -42,6 +44,7 @@ namespace WithHangFire
                 app.UseDeveloperExceptionPage();
             }
 
+            // register hangfire middlewares
             app.UseHangfireDashboard();
             app.UseHangfireServer();
 

@@ -25,14 +25,11 @@ namespace WithHangFire.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-
-
             //RecurringJob.AddOrUpdate(() => Console.WriteLine("Recurring!"), Cron.Minutely);
 
+            // send email after 2 min
             var jobId = BackgroundJob.Schedule<IEmailService>(service => service.SendMail(),
                 TimeSpan.FromMinutes(2));
-
-
 
             return jobId+ "";
         }
